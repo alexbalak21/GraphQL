@@ -3,6 +3,7 @@ const {graphqlHTTP} = require("express-graphql")
 const {GraphQLSchema, graphql, GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt, GraphQLNonNull} = require("graphql")
 const app = express()
 
+//DUMMY DATA
 const authors = [
   {id: 1, name: "J. K. Rowling"},
   {id: 2, name: "J. R. R. Tolkien"},
@@ -103,6 +104,21 @@ const RootMutationType = new GraphQLObjectType({
         }
         books.push(book)
         return book
+      },
+    },
+    addAuthor: {
+      type: AuthorType,
+      description: "Add an author",
+      args: {
+        name: {type: new GraphQLNonNull(GraphQLString)},
+      },
+      resolve: (parent, args) => {
+        const author = {
+          id: authors.length + 1,
+          name: args.name,
+        }
+        authors.push(author)
+        return author
       },
     },
   }),
