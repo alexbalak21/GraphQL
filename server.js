@@ -56,7 +56,7 @@ const RootQueryType = new GraphQLObjectType({
   description: "Root Query",
   fields: () => ({
     author: {
-      type: BookType,
+      type: AuthorType,
       description: "An author of books",
       args: {
         id: {type: GraphQLInt},
